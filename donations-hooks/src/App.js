@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import DonationForm from './DonationForm'
+import Progress from './Progess'
+import RecentDonations from './RecentDonations'
+import TopBar from './TopBar'
+
 
 function App() {
+
+
+  const [totalDonated, setTotalDonated] = useState(0)
+  const [progressPercentage, setProgressPercentage] = useState(0)
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
+  // const [submittedForm, setSubmittedForm] = useState([]);
+  const [donationAmount, setDonationAmount] = useState(0);
+  const [donationGoal, setDonationGoal] = useState(5000);
+
+ 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <TopBar />
+      {/* <RecentDonations
+        donations={donationAmount}
+        
+      /> */}
+      <Progress
+        totalDonated={totalDonated}
+        donationGoal= {donationGoal}
+        progressPercentage={progressPercentage}
+      />
+      <DonationForm
+        donationAmount={donationAmount}
+        customRangeFunct={(e) => setDonationAmount(e.target.value)}
+        name={name}
+        nameInput={(e) => setName(e.target.value)}
+        message={message}
+        messageInput={(e) => setMessage(e.target.value)}
+      />
+
+
     </div>
   );
 }
 
 export default App;
+
